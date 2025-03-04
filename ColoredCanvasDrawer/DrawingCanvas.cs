@@ -106,7 +106,9 @@
         public void DrawTriangle(int startRow, int startCol, int endRow,
             int endCol, Color color)
         {
-            throw new NotImplementedException();
+            this.DrawDiagonalLine(startCol, startRow, endCol, startRow, color);
+            this.DrawDiagonalLine(startCol, startRow, (endCol - startCol) / 2, endRow, color);
+            this.DrawDiagonalLine(endCol, startRow, (endCol - startCol) / 2, endRow, color);
         }
 
         private void PlotLineLow(int startCol, int startRow, int endCol,
