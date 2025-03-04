@@ -92,7 +92,20 @@
         public void DrawDiagonalLine(int startCol, int startRow, int endCol,
             int endRow, Color color)
         {
-            throw new NotImplementedException();
+            if (Math.Abs(endRow - startRow) < Math.Abs(endCol - startCol))
+            {
+                if (startCol > endCol)
+                    PlotLineLow(endCol, endRow, startCol, startRow, color);
+                else
+                    PlotLineLow(startCol, startRow, endCol, endRow, color);
+            }
+            else
+            {
+                if (startRow > endRow)
+                    PlotLineHigh(endCol, endRow, startCol, startRow, color);
+                else
+                    PlotLineHigh(startCol, startRow, endCol, endRow, color);
+            }
         }
 
         public void DrawRectangle(int startRow, int startCol, int endRow, int endCol, Color color)
