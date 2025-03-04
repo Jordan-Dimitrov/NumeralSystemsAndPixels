@@ -77,7 +77,8 @@
         public void DrawHorizontalLine(int row, int startCol, int endCol,
             CanvasColor color)
         {
-            throw new NotImplementedException();
+            for (int i = startCol; i < endCol; i++)
+                SetPixel(row, i, color);
         }
 
         public void DrawVerticalLine(int col, int startRow, int endRow,
