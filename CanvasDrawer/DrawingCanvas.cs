@@ -71,7 +71,14 @@
 
         public void SetPixel(int row, int col, CanvasColor color)
         {
-            throw new NotImplementedException();
+            CheckBounds(col, row);
+            int targetRow = row;
+            int targetCollumn = col / 32;
+            uint targetInt = pixels[targetCollumn][targetCollumn];
+            int bitIndex = col % 32;
+            targetInt &= ~(1u << (bitIndex));
+            targetInt |= ((uint)color << (bitIndex));
+            pixels[targetCollumn][targetCollumn] = targetInt;
         }
 
         public void DrawHorizontalLine(int row, int startCol, int endCol,

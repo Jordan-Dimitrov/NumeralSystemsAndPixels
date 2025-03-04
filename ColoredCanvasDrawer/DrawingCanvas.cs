@@ -70,6 +70,8 @@
 
         public void SetPixel(int row, int col, Color color)
         {
+            CheckBounds(row, col);
+            byte pixelValue = pixels[row][col];
             throw new NotImplementedException();
         }
 
