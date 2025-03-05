@@ -100,7 +100,8 @@
         public void DrawVerticalLine(int col, int startRow, int endRow,
             CanvasColor color)
         {
-            throw new NotImplementedException();
+            for (int i = startRow; i < endRow; i++)
+                SetPixel(i, col, color);
         }
 
         public void DrawRectangle(int startRow, int startCol, int endRow, int endCol,

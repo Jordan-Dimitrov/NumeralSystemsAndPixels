@@ -94,7 +94,20 @@
         public void DrawDiagonalLine(int startCol, int startRow, int endCol,
             int endRow, Color color)
         {
-            throw new NotImplementedException();
+            if (Math.Abs(endRow - startRow) < Math.Abs(endCol - startCol))
+            {
+                if (startCol > endCol)
+                    PlotLineLow(endCol, endRow, startCol, startRow, color);
+                else
+                    PlotLineLow(startCol, startRow, endCol, endRow, color);
+            }
+            else
+            {
+                if (startRow > endRow)
+                    PlotLineHigh(endCol, endRow, startCol, startRow, color);
+                else
+                    PlotLineHigh(startCol, startRow, endCol, endRow, color);
+            }
         }
 
         public void DrawRectangle(int startRow, int startCol, int endRow, int endCol, Color color)
@@ -108,13 +121,41 @@
         public void DrawTriangle(int startRow, int startCol, int endRow,
             int endCol, Color color)
         {
-            throw new NotImplementedException();
+            this.DrawDiagonalLine(startCol, startRow, endCol, startRow, color);
+            this.DrawDiagonalLine(startCol, startRow, (endCol - startCol) / 2, endRow, color);
+            this.DrawDiagonalLine(endCol, startRow, (endCol - startCol) / 2, endRow, color);
         }
 
         private void PlotLineLow(int startCol, int startRow, int endCol,
             int endRow, Color color)
         {
-            throw new NotImplementedException();
+            int dx = endCol - startCol;
+            int dy = endRow - startRow;
+            int yi = 1;
+
+            if (dy < 0)
+            {
+                yi = -1;
+                dy = -dy;
+            }
+
+            int D = (2 * dy) - dx;
+            int y = startRow;
+
+            for (int x = startCol; x <= endCol; x++)
+            {
+                SetPixel(x, y, color);
+
+                if (D > 0)
+                {
+                    y += yi;
+                    D += 2 * (dy - dx);
+                }
+                else
+                {
+                    D += 2 * dy;
+                }
+            }
         }
 
         private void PlotLineHigh(int startCol, int startRow, int endCol,
