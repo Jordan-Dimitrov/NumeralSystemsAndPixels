@@ -66,7 +66,16 @@
 
         public CanvasColor GetPixel(int row, int col)
         {
-            throw new NotImplementedException();
+            this.CheckBounds(row, col);
+
+            uint[] targetRow = this.pixels[row];
+            int targetCol = col / 32;
+            uint targetInt = targetRow[targetCol];
+            int targeBitIndex = col % 32;
+            targetInt = (targetInt >> targeBitIndex) % 1;
+
+            return (CanvasColor)targetInt;
+
         }
 
         public void SetPixel(int row, int col, CanvasColor color)
