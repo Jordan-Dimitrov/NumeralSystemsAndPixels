@@ -127,7 +127,33 @@
         private void PlotLineLow(int startCol, int startRow, int endCol,
             int endRow, Color color)
         {
-            throw new NotImplementedException();
+            int dx = endCol - startCol;
+            int dy = endRow - startRow;
+            int yi = 1;
+
+            if (dy < 0)
+            {
+                yi = -1;
+                dy = -dy;
+            }
+
+            int D = (2 * dy) - dx;
+            int y = startRow;
+
+            for (int x = startCol; x <= endCol; x++)
+            {
+                SetPixel(x, y, color);
+
+                if (D > 0)
+                {
+                    y += yi;
+                    D += 2 * (dy - dx);
+                }
+                else
+                {
+                    D += 2 * dy;
+                }
+            }
         }
 
         private void PlotLineHigh(int startCol, int startRow, int endCol,
